@@ -75,16 +75,20 @@ class _ProfilePageState extends State<ProfilePage> {
                 'About Developer',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
+              const SizedBox(height: 8),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: TextFormField(
-                  initialValue:
-                      "I am Ganesh Shinde, a dedicated Computer Science and Engineering student with a passion for mobile development. Currently in my 6th semester at Dayananda Sagar University, I possess comprehensive skills in React Native and Flutter, acquired through hands-on experiences in various internships also delpoying in playstore and applestore. My proficiency includes designing and developing robust mobile applications, contributing to the success of projects at previous internships. I am eager to leverage my expertise as a React Native and Flutter developer to deliver innovative and impactful solutions.",
-                  enabled: false,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                  ),
-                  maxLines: 15,
+                margin: const EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 20,
+                ),
+                decoration: BoxDecoration(
+                  border: Border.all(color: const Color(0xFFDFBD43)),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Text(
+                  'I am Ganesh Shinde, a dedicated Computer Science and Engineering student with a passion for mobile development. Currently in my 6th semester at Dayananda Sagar University, I possess comprehensive skills in React Native and Flutter, acquired through hands-on experiences in various internships also delpoying in playstore and applestore. My proficiency includes designing and developing robust mobile applications, contributing to the success of projects at previous internships. I am eager to leverage my expertise as a React Native and Flutter developer to deliver innovative and impactful solutions.',
+                  style: TextStyle(fontSize: 15, color: Colors.grey),
                 ),
               ),
             ],

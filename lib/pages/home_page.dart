@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:myapp/components/snack_bar.dart';
 import 'package:myapp/pages/plan_details_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -78,6 +81,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
         // Fetch updated plans
         await _fetchPlansFromFirestore();
+
+        showSnackBar(
+          context: context,
+          content: "Plan created successfully!",
+        );
       }
     }
   }
@@ -207,9 +215,15 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       plan['name'].toString().toUpperCase(),
                       style: const TextStyle(
                         color: Color.fromARGB(255, 126, 126, 126),
-                        fontSize: 18,
+                        fontSize: 17,
                         fontWeight: FontWeight.w700,
                       ),
+                    ),
+                    subtitle: Text('Date: ${_formatDate(plan['planDate'])}'),
+                    trailing: const Icon(
+                      Icons.indeterminate_check_box,
+                      color: Color(0xFFDFBD43),
+                      size: 35,
                     ),
                   ),
                 ),
@@ -255,5 +269,17 @@ class _HomePageScreenState extends State<HomePageScreen> {
         ),
       ),
     );
+  }
+
+  String _formatDate(Timestamp? date) {
+    if (date != null) {
+      return _formatTimestamp(date);
+    }
+    return '';
+  }
+
+  String _formatTimestamp(Timestamp timestamp) {
+    var dateTime = timestamp.toDate();
+    return '${dateTime.day}-${dateTime.month}-${dateTime.year}';
   }
 }

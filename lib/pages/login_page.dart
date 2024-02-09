@@ -97,6 +97,7 @@ class _LoginPageState extends State<LoginPage> {
         'displayName': user.displayName,
         'email': user.email,
         'profilePicUrl': user.photoURL,
+        'sharedPlans': [],
       }).catchError((error) {
         showSnackBar(
           context: context,
