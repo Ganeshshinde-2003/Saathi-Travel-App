@@ -165,9 +165,13 @@ class _LoginPageState extends State<LoginPage> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
-                  color: const Color.fromARGB(238, 241, 244, 255),
+                  color: const Color(0xFFFFFDF4),
+                  border: Border.all(
+                    color: const Color(0xFFDFBD43),
+                    width: 1,
+                  ),
                 ),
-                padding: const EdgeInsets.symmetric(vertical: 7),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: const Center(
                   child: Text(
                     "Login now",
@@ -187,7 +191,11 @@ class _LoginPageState extends State<LoginPage> {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 3),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    color: const Color.fromARGB(238, 241, 244, 255),
+                    color: const Color(0xFFFFFDF4),
+                    border: Border.all(
+                      color: const Color(0xFFDFBD43),
+                      width: 1,
+                    ),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

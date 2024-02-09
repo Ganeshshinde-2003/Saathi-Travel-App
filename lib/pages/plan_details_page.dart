@@ -173,6 +173,7 @@ class _PlanDetailsPageState extends State<PlanDetailsPage> {
       ),
       body: Container(
         width: double.infinity,
+        color: const Color(0xFFFFFDF4),
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
           vertical: 20,

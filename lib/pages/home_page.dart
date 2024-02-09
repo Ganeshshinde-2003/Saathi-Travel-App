@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:myapp/components/snack_bar.dart';
@@ -75,6 +76,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
           'planDate': selectedDate,
           'checkedCheckpoints': [],
           'uncheckedCheckpoints': [],
+          'userId': FirebaseAuth.instance.currentUser?.uid,
         });
 
         _planNameController.clear();
@@ -119,19 +121,26 @@ class _HomePageScreenState extends State<HomePageScreen> {
   }
 
   Future<void> _fetchPlansFromFirestore() async {
-    QuerySnapshot<Map<String, dynamic>> querySnapshot =
-        await FirebaseFirestore.instance.collection('plans').get();
+    String? currentUserId = FirebaseAuth.instance.currentUser?.uid;
 
-    List<Map<String, dynamic>> fetchedPlans = querySnapshot.docs
-        .map((QueryDocumentSnapshot<Map<String, dynamic>> doc) {
-      Map<String, dynamic> data = doc.data();
-      data['id'] = doc.id;
-      return data;
-    }).toList();
+    if (currentUserId != null) {
+      QuerySnapshot<Map<String, dynamic>> querySnapshot =
+          await FirebaseFirestore.instance
+              .collection('plans')
+              .where('userId', isEqualTo: currentUserId)
+              .get();
 
-    setState(() {
-      plans = fetchedPlans;
-    });
+      List<Map<String, dynamic>> fetchedPlans = querySnapshot.docs
+          .map((QueryDocumentSnapshot<Map<String, dynamic>> doc) {
+        Map<String, dynamic> data = doc.data();
+        data['id'] = doc.id;
+        return data;
+      }).toList();
+
+      setState(() {
+        plans = fetchedPlans;
+      });
+    }
   }
 
   @override

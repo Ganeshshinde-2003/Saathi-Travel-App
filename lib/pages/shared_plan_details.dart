@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:myapp/pages/group_details_page.dart';
 
 class SharedPlanDetailsPage extends StatefulWidget {
   final String planId;
@@ -126,9 +127,27 @@ class _SharedPlanDetailsPageState extends State<SharedPlanDetailsPage> {
         iconTheme: const IconThemeData(
           color: Color(0xFFDFBD43), // Set color for the backward icon
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.info_outline,
+              size: 30,
+            ),
+            onPressed: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      GroupDetailPageScreen(planId: widget.planId),
+                ),
+              )
+            },
+          ),
+        ],
       ),
       body: Container(
         width: double.infinity,
+        color: const Color(0xFFFFFDF4),
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
           vertical: 20,
