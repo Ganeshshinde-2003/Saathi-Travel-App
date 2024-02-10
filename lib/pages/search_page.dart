@@ -83,7 +83,6 @@ class _SearchPageState extends State<SearchPage> {
                           ),
                           title: Text(searchResults[index]['displayName']),
                           subtitle: Text(searchResults[index]['email']),
-                          // You can customize this further based on the user data
                         );
                       },
                     )

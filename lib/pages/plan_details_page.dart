@@ -14,25 +14,22 @@ class PlanDetailsPage extends StatefulWidget {
 
 class _PlanDetailsPageState extends State<PlanDetailsPage> {
   final TextEditingController _taskNameController = TextEditingController();
-  Map<String, dynamic> plan = {}; // Local variable to store plan data
+  Map<String, dynamic> plan = {};
   Set<String> checkedTasks = Set();
 
   @override
   void initState() {
     super.initState();
-    // Fetch plan data when the widget is initialized
     _fetchPlanData();
   }
 
   Future<void> _fetchPlanData() async {
-    // Fetch the plan data from Firebase using the planId
     DocumentSnapshot<Map<String, dynamic>> planSnapshot =
         await FirebaseFirestore.instance
             .collection('plans')
             .doc(widget.planId)
             .get();
 
-    // Update the local state with the new plan data
     setState(() {
       plan = planSnapshot.data() ?? {};
     });
@@ -42,7 +39,6 @@ class _PlanDetailsPageState extends State<PlanDetailsPage> {
     String taskName = _taskNameController.text.trim();
 
     if (taskName.isNotEmpty && plan.isNotEmpty) {
-      // Update Firebase with the new task
       await FirebaseFirestore.instance
           .collection('plans')
           .doc(widget.planId)
@@ -56,7 +52,6 @@ class _PlanDetailsPageState extends State<PlanDetailsPage> {
   }
 
   Future<void> _deleteTask(String taskName) async {
-    // Delete the task from Firebase
     await FirebaseFirestore.instance
         .collection('plans')
         .doc(widget.planId)
@@ -64,7 +59,6 @@ class _PlanDetailsPageState extends State<PlanDetailsPage> {
       'uncheckedCheckpoints': FieldValue.arrayRemove([taskName]),
     });
 
-    // Fetch the updated plan from Firebase
     _fetchPlanData();
   }
 
@@ -88,7 +82,6 @@ class _PlanDetailsPageState extends State<PlanDetailsPage> {
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () async {
-                  // Update the task name in Firebase
                   await FirebaseFirestore.instance
                       .collection('plans')
                       .doc(widget.planId)
@@ -103,7 +96,6 @@ class _PlanDetailsPageState extends State<PlanDetailsPage> {
                     'uncheckedCheckpoints':
                         FieldValue.arrayUnion([_editedTaskController.text]),
                   });
-                  // Fetch the updated plan from Firebase
                   _fetchPlanData();
                   Navigator.of(context).pop();
                 },
@@ -117,7 +109,6 @@ class _PlanDetailsPageState extends State<PlanDetailsPage> {
   }
 
   Future<void> _deletePlan() async {
-    // Show a confirmation dialog
     bool confirmDelete = await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -143,13 +134,11 @@ class _PlanDetailsPageState extends State<PlanDetailsPage> {
     );
 
     if (confirmDelete == true) {
-      // Delete the plan from Firestore
       await FirebaseFirestore.instance
           .collection('plans')
           .doc(widget.planId)
           .delete();
 
-      // Navigate back to the previous screen (you may need to adjust this based on your navigation setup)
       Navigator.pop(context);
     }
   }
@@ -160,8 +149,7 @@ class _PlanDetailsPageState extends State<PlanDetailsPage> {
       appBar: AppBar(
         title: Text(plan['name'].toString().toUpperCase()),
         backgroundColor: const Color(0xFFEDEAEA),
-        iconTheme: const IconThemeData(
-            color: Color(0xFFDFBD43)), // Set color for the backward icon
+        iconTheme: const IconThemeData(color: Color(0xFFDFBD43)),
         actions: [
           IconButton(
             icon: const Icon(
@@ -240,7 +228,6 @@ class _PlanDetailsPageState extends State<PlanDetailsPage> {
                                         FieldValue.arrayUnion([taskName]),
                                   });
 
-                                  // Fetch the updated plan data
                                   _fetchPlanData();
                                 }
                               },

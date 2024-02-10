@@ -36,7 +36,6 @@ class _GroupDetailPageScreenState extends State<GroupDetailPageScreen> {
   }
 
   Future<void> _deletePlan() async {
-    // Show a confirmation dialog
     bool confirmDelete = await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -62,13 +61,11 @@ class _GroupDetailPageScreenState extends State<GroupDetailPageScreen> {
     );
 
     if (confirmDelete == true) {
-      // Delete the plan from Firestore
       await FirebaseFirestore.instance
           .collection('sharedplans')
           .doc(widget.planId)
           .delete();
-
-      // Navigate back to the previous screen (you may need to adjust this based on your navigation setup)
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
     }
   }

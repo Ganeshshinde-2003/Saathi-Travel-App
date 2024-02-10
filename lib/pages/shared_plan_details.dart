@@ -16,26 +16,22 @@ class SharedPlanDetailsPage extends StatefulWidget {
 
 class _SharedPlanDetailsPageState extends State<SharedPlanDetailsPage> {
   final TextEditingController _taskNameController = TextEditingController();
-  Map<String, dynamic> sharedPlan =
-      {}; // Local variable to store shared plan data
+  Map<String, dynamic> sharedPlan = {};
   Set<String> checkedTasks = Set();
 
   @override
   void initState() {
     super.initState();
-    // Fetch shared plan data when the widget is initialized
     _fetchSharedPlanData();
   }
 
   Future<void> _fetchSharedPlanData() async {
-    // Fetch the shared plan data from Firebase using the planId
     DocumentSnapshot<Map<String, dynamic>> sharedPlanSnapshot =
         await FirebaseFirestore.instance
             .collection('sharedplans')
             .doc(widget.planId)
             .get();
 
-    // Update the local state with the new shared plan data
     setState(() {
       sharedPlan = sharedPlanSnapshot.data() ?? {};
     });
@@ -45,7 +41,6 @@ class _SharedPlanDetailsPageState extends State<SharedPlanDetailsPage> {
     String taskName = _taskNameController.text.trim();
 
     if (taskName.isNotEmpty && sharedPlan.isNotEmpty) {
-      // Update Firebase with the new task
       await FirebaseFirestore.instance
           .collection('sharedplans')
           .doc(widget.planId)
@@ -59,7 +54,6 @@ class _SharedPlanDetailsPageState extends State<SharedPlanDetailsPage> {
   }
 
   Future<void> _deleteTask(String taskName) async {
-    // Delete the task from Firebase
     await FirebaseFirestore.instance
         .collection('sharedplans')
         .doc(widget.planId)
@@ -68,7 +62,6 @@ class _SharedPlanDetailsPageState extends State<SharedPlanDetailsPage> {
       'checkedChecklist': FieldValue.arrayRemove([taskName]),
     });
 
-    // Fetch the updated shared plan from Firebase
     _fetchSharedPlanData();
   }
 
@@ -91,7 +84,6 @@ class _SharedPlanDetailsPageState extends State<SharedPlanDetailsPage> {
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () async {
-                  // Update the task name in Firebase
                   await FirebaseFirestore.instance
                       .collection('sharedplans')
                       .doc(widget.planId)
@@ -125,7 +117,7 @@ class _SharedPlanDetailsPageState extends State<SharedPlanDetailsPage> {
         title: Text(sharedPlan['name'].toString().toUpperCase()),
         backgroundColor: const Color(0xFFEDEAEA),
         iconTheme: const IconThemeData(
-          color: Color(0xFFDFBD43), // Set color for the backward icon
+          color: Color(0xFFDFBD43),
         ),
         actions: [
           IconButton(
@@ -227,7 +219,6 @@ class _SharedPlanDetailsPageState extends State<SharedPlanDetailsPage> {
                                     });
                                   }
 
-                                  // Fetch the updated shared plan data
                                   _fetchSharedPlanData();
                                 }
                               },

@@ -112,7 +112,6 @@ class _LoginPageState extends State<LoginPage> {
     bool hasUserCredential = prefs.containsKey('userCredential');
 
     if (hasUserCredential) {
-      // Check if Firestore has user data
       User? user = FirebaseAuth.instance.currentUser;
       DocumentSnapshot userDoc = await FirebaseFirestore.instance
           .collection('users')

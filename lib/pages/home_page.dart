@@ -34,7 +34,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
     String userCredentialString = prefs.getString('userCredential') ?? '';
 
     if (userCredentialString.isNotEmpty) {
-      // Decode the stored JSON string
       Map<String, dynamic> userCredentialJson =
           json.decode(userCredentialString);
 
@@ -81,7 +80,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
         _planNameController.clear();
 
-        // Fetch updated plans
         await _fetchPlansFromFirestore();
 
         showSnackBar(
