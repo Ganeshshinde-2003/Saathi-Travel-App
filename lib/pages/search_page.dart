@@ -59,33 +59,39 @@ class _SearchPageState extends State<SearchPage> {
             ),
             const SizedBox(height: 16.0),
             Expanded(
-              child: ListView.builder(
-                itemCount: searchResults.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    leading: Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: const Color(0xFFDFBD43),
-                          width: 2.0,
-                        ),
-                      ),
-                      child: CircleAvatar(
-                        radius: 28,
-                        backgroundColor: Colors.transparent,
-                        backgroundImage:
-                            NetworkImage(searchResults[index]['profilePicUrl']),
-                      ),
+              child: searchResults.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: searchResults.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: Container(
+                            width: 60,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: const Color(0xFFDFBD43),
+                                width: 2.0,
+                              ),
+                            ),
+                            child: CircleAvatar(
+                              radius: 28,
+                              backgroundColor: Colors.transparent,
+                              backgroundImage: NetworkImage(
+                                  searchResults[index]['profilePicUrl']),
+                            ),
+                          ),
+                          title: Text(searchResults[index]['displayName']),
+                          subtitle: Text(searchResults[index]['email']),
+                          // You can customize this further based on the user data
+                        );
+                      },
+                    )
+                  : Image.asset(
+                      'assets/images/search.png',
+                      width: 400,
+                      fit: BoxFit.contain,
                     ),
-                    title: Text(searchResults[index]['displayName']),
-                    subtitle: Text(searchResults[index]['email']),
-                    // You can customize this further based on the user data
-                  );
-                },
-              ),
             ),
           ],
         ),

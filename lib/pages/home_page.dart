@@ -199,45 +199,60 @@ class _HomePageScreenState extends State<HomePageScreen> {
               ),
             ),
             const SizedBox(height: 10),
-            ...plans.map((plan) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            PlanDetailsPage(planId: plan['id'])),
-                  );
-                },
-                child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(
-                      color: const Color(0xFFD6D6D6),
-                      width: 2.0,
+            plans.isNotEmpty
+                ? Expanded(
+                    child: ListView.builder(
+                      itemCount: plans.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PlanDetailsPage(
+                                      planId: plans[index]['id'])),
+                            );
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              border: Border.all(
+                                color: const Color(0xFFD6D6D6),
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            child: ListTile(
+                              title: Text(
+                                plans[index]['name'].toString().toUpperCase(),
+                                style: const TextStyle(
+                                  color: Color.fromARGB(255, 126, 126, 126),
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              subtitle: Text(
+                                  'Date: ${_formatDate(plans[index]['planDate'])}'),
+                              trailing: const Icon(
+                                Icons.indeterminate_check_box,
+                                color: Color(0xFFDFBD43),
+                                size: 35,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                    borderRadius: BorderRadius.circular(15.0),
+                  )
+                : Container(
+                    margin: const EdgeInsets.only(top: 70),
+                    child: Image.asset(
+                      'assets/images/home.png',
+                      width: 400,
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                  child: ListTile(
-                    title: Text(
-                      plan['name'].toString().toUpperCase(),
-                      style: const TextStyle(
-                        color: Color.fromARGB(255, 126, 126, 126),
-                        fontSize: 17,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    subtitle: Text('Date: ${_formatDate(plan['planDate'])}'),
-                    trailing: const Icon(
-                      Icons.indeterminate_check_box,
-                      color: Color(0xFFDFBD43),
-                      size: 35,
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
           ],
         ),
       ),

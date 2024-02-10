@@ -33,34 +33,32 @@ class _BottomNavigationState extends State<BottomNavigation> {
       const Icon(Icons.search, size: 30),
       const Icon(Icons.person_2_outlined, size: 30),
     ];
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Image.asset(
-            'assets/images/logo@2x.png',
-            width: 200,
-            fit: BoxFit.contain,
-          ),
-          backgroundColor: const Color(0xFFEDEAEA),
+    return Scaffold(
+      appBar: AppBar(
+        title: Image.asset(
+          'assets/images/logo@2x.png',
+          width: 200,
+          fit: BoxFit.contain,
         ),
-        extendBody: true,
-        body: Screens[index],
-        bottomNavigationBar: Theme(
-          data: Theme.of(context)
-              .copyWith(iconTheme: const IconThemeData(color: Colors.black)),
-          child: CurvedNavigationBar(
-            key: navigationKey,
-            color: const Color(0xFFEDEAEA),
-            buttonBackgroundColor: const Color(0xFFEDEAEA),
-            backgroundColor: Colors.transparent,
-            items: items,
-            height: 60,
-            index: index,
-            onTap: (index) => setState(
-              () {
-                this.index = index;
-              },
-            ),
+        backgroundColor: const Color(0xFFEDEAEA),
+      ),
+      extendBody: true,
+      body: Screens[index],
+      bottomNavigationBar: Theme(
+        data: Theme.of(context)
+            .copyWith(iconTheme: const IconThemeData(color: Colors.black)),
+        child: CurvedNavigationBar(
+          key: navigationKey,
+          color: const Color(0xFFEDEAEA),
+          buttonBackgroundColor: const Color(0xFFEDEAEA),
+          backgroundColor: Colors.transparent,
+          items: items,
+          height: 60,
+          index: index,
+          onTap: (index) => setState(
+            () {
+              this.index = index;
+            },
           ),
         ),
       ),

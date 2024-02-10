@@ -235,7 +235,7 @@ class _SharedPlanDetailsPageState extends State<SharedPlanDetailsPage> {
                             title: Text(
                               taskName.toString().toUpperCase(),
                               style: const TextStyle(
-                                fontSize: 18,
+                                fontSize: 15,
                                 fontWeight: FontWeight.w500,
                                 color: Color.fromARGB(255, 126, 126, 126),
                               ),
@@ -305,7 +305,7 @@ class _SharedPlanDetailsPageState extends State<SharedPlanDetailsPage> {
                             title: Text(
                               checkedTaskName.toString().toUpperCase(),
                               style: const TextStyle(
-                                fontSize: 18,
+                                fontSize: 15,
                                 fontWeight: FontWeight.w500,
                                 color: Color.fromARGB(255, 126, 126, 126),
                               ),

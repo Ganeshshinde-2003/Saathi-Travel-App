@@ -248,7 +248,7 @@ class _PlanDetailsPageState extends State<PlanDetailsPage> {
                             title: Text(
                               taskName.toString().toUpperCase(),
                               style: const TextStyle(
-                                fontSize: 18,
+                                fontSize: 15,
                                 fontWeight: FontWeight.w500,
                                 color: Color.fromARGB(255, 126, 126, 126),
                               ),
@@ -317,7 +317,7 @@ class _PlanDetailsPageState extends State<PlanDetailsPage> {
                             title: Text(
                               checkedTaskName.toString().toUpperCase(),
                               style: const TextStyle(
-                                fontSize: 18,
+                                fontSize: 15,
                                 fontWeight: FontWeight.w500,
                                 color: Color.fromARGB(255, 126, 126, 126),
                               ),

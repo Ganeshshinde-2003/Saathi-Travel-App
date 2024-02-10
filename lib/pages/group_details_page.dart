@@ -35,6 +35,44 @@ class _GroupDetailPageScreenState extends State<GroupDetailPageScreen> {
     }
   }
 
+  Future<void> _deletePlan() async {
+    // Show a confirmation dialog
+    bool confirmDelete = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Delete Plan'),
+          content: const Text('Are you sure you want to delete this plan?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+              child: const Text('Yes'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: const Text('No'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirmDelete == true) {
+      // Delete the plan from Firestore
+      await FirebaseFirestore.instance
+          .collection('sharedplans')
+          .doc(widget.planId)
+          .delete();
+
+      // Navigate back to the previous screen (you may need to adjust this based on your navigation setup)
+      Navigator.pop(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +85,14 @@ class _GroupDetailPageScreenState extends State<GroupDetailPageScreen> {
         iconTheme: const IconThemeData(
           color: Color(0xFFDFBD43),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.delete,
+            ),
+            onPressed: () => _deletePlan(),
+          ),
+        ],
       ),
       body: Container(
         width: double.infinity,

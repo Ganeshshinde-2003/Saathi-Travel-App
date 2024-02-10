@@ -42,6 +42,7 @@ class _GroupListingPageState extends State<GroupListingPage> {
           onPressed: () {
             _showGroupOptions(context);
           },
+          backgroundColor: const Color(0xFFDFBD43),
           child: const Icon(Icons.add),
         ),
       ),
@@ -123,7 +124,16 @@ class _GroupListingPageState extends State<GroupListingPage> {
                   }
                 }
 
-                return Column(children: planWidgets);
+                return planWidgets.isEmpty
+                    ? Container(
+                        margin: const EdgeInsets.only(top: 150),
+                        child: Image.asset(
+                          'assets/images/shared.png',
+                          width: 500,
+                          fit: BoxFit.contain,
+                        ),
+                      )
+                    : Column(children: planWidgets);
               }
             },
           );
