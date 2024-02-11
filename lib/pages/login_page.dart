@@ -136,19 +136,24 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         body: Container(
           width: double.infinity,
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+          color: const Color(0xFFFFFDF4),
+          padding: const EdgeInsets.symmetric(
+            vertical: 10,
+            horizontal: 30,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
                 "Hop on the Hype Train!",
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 30,
                   fontWeight: FontWeight.w500,
                   color: Color.fromARGB(255, 59, 58, 58),
                 ),
               ),
-              const SizedBox(height: 180),
+              const SizedBox(height: 30),
               Image.asset(
                 'assets/images/logo@2x.png',
                 width: 200,
